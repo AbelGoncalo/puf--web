@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { background, color } from './styled'
+import { background, font } from './styled'
 
 export const GlobalStyle = createGlobalStyle`
   html, body{
@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   body {
   ${background}
-  ${color}
+  ${font}
     margin: 0;
     font-size: 16px;
     font-family:
@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family:
       source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
   }
-      
+
   input{
     font-size: inherit;
     outline:none;

@@ -16,7 +16,7 @@ const colors = {
   ...brandColors,
 }
 
-const fontSizes = [12, 14, 16, 18, 20, 21]
+const fontSizes = [12, 14, 16, 18, 21]
 const spaces = [4, 8, 12, 16, 20, 24, 32, 64, 128]
 
 export const definitions = {

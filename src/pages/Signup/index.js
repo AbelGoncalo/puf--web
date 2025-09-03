@@ -1,10 +1,12 @@
 import * as React from 'react'
 import { useState } from 'react'
+import axios from 'axios'
 
 import { Box, Field, Button } from '~/components/'
 
 export const Signup = () => {
   const [values, setValues] = useState({})
+  const [loading, setLoading] = useState(false)
 
   const onChange = ev => {
     setValues(prev => ({
@@ -13,9 +15,17 @@ export const Signup = () => {
     }))
   }
 
-  const onSubmit = () => {
-    EvalError.preventDefault()
-    console.log(values)
+  const onSubmit = async ev => {
+    ev.preventDefault()
+    setLoading(true)
+
+    try {
+      await axios.post('http://localhost:9901/users', values)
+    } catch (error) {
+      console.log('Error during signup:', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -28,26 +38,31 @@ export const Signup = () => {
             label="Nome"
             mb={3}
             onChange={onChange}
+            disabled={loading}
           />
           <Field
             type="email"
             name="email"
             label="E-mail"
-            mb={3}
             onChange={onChange}
+            disabled={loading}
+            mb={3}
           />
           <Field
             type="password"
             name="password"
             label="Senha"
-            mb={3}
             onChange={onChange}
+            disabled={loading}
+            mb={3}
           />
-        </form>
-      </Box>
 
-      <Box flexbox center>
-        <Button>Registrar</Button>
+          <Box flexbox center>
+            <Button type="submit" loading={loading}>
+              Registrar
+            </Button>
+          </Box>
+        </form>
       </Box>
     </Box>
   )
