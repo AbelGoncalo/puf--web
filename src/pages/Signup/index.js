@@ -1,64 +1,83 @@
 import * as React from 'react'
-import { useState } from 'react'
 import axios from 'axios'
+import * as yup from 'yup'
+import { useFormik } from 'formik'
 
 import { Box, Field, Button } from '~/components/'
 
+const validationSchema = yup.object().shape({
+  name: yup.string().required('Informe o seu nome'),
+  email: yup.string().required('Digite seu email').email('Email inválido'),
+  password: yup.string().required('Digite uma senha'),
+})
+
 export const Signup = () => {
-  const [values, setValues] = useState({})
-  const [loading, setLoading] = useState(false)
-
-  const onChange = ev => {
-    setValues(prev => ({
-      ...prev,
-      [ev.target.name]: ev.target.value,
-    }))
-  }
-
-  const onSubmit = async ev => {
-    ev.preventDefault()
-    setLoading(true)
-
+  const onSubmit = async () => {
     try {
       await axios.post('http://localhost:9901/users', values)
     } catch (error) {
-      console.log('Error during signup:', error)
-    } finally {
-      setLoading(false)
+      console.log(error)
     }
   }
+
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    isSubmitting,
+    handleSubmit,
+    handleBlur,
+  } = useFormik({
+    onSubmit,
+    validationSchema,
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+  })
 
   return (
     <Box flex={1} flexbox="column" center>
       <Box style={{ width: 380 }}>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
           <Field
             type="text"
             name="name"
             label="Nome"
+            value={values.name}
             mb={3}
-            onChange={onChange}
-            disabled={loading}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            disabled={isSubmitting}
+            error={touched.name && errors.name}
           />
           <Field
             type="email"
             name="email"
             label="E-mail"
-            onChange={onChange}
-            disabled={loading}
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            disabled={isSubmitting}
+            error={touched.name && errors.email}
             mb={3}
           />
           <Field
             type="password"
             name="password"
             label="Senha"
-            onChange={onChange}
-            disabled={loading}
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            disabled={isSubmitting}
+            error={touched.name && errors.password}
             mb={3}
           />
 
           <Box flexbox center>
-            <Button type="submit" loading={loading}>
+            <Button type="submit" loading={isSubmitting}>
               Registrar
             </Button>
           </Box>
