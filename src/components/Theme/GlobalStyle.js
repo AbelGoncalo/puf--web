@@ -2,20 +2,25 @@ import { createGlobalStyle } from 'styled-components'
 import { background, font } from './styled'
 
 export const GlobalStyle = createGlobalStyle`
-  html, body{
-    height: 100%;
-  }
-  body {
-  ${background}
-  ${font}
-    margin: 0;
-    font-size: 16px;
-    font-family:
-      -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+*{
+  font-family:
+      Manrope,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
       'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+}
+      
+html, body{
+  height: 100%;
+}
+body {
+${background}
+${font}
+  margin: 0;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
   #root{
     height: 100%;
