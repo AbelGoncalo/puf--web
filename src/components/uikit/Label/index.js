@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 import { th } from '~/components/Theme/styled'
 
 export const Label = styled('label')`
