@@ -18,7 +18,7 @@ const Link = styled('a')`
   ${margin}
 `
 export const Form = () => {
-  const onSubmit = async () => {
+  const onSubmit = async values => {
     try {
       await axios.post('http://localhost:9901/users', values)
     } catch (error) {
