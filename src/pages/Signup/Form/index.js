@@ -2,6 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
+import { Link as RouterLink } from 'react-router-dom'
 
 import styled from 'styled-components'
 import { Box, Field, Button, font, margin } from '~/components/'
@@ -12,7 +13,7 @@ const validationSchema = yup.object().shape({
   password: yup.string().required('Digite uma senha'),
 })
 
-const Link = styled('a')`
+const Link = styled(RouterLink)`
   text-decoration: none;
   ${font}
   ${margin}
@@ -82,7 +83,7 @@ export const Form = () => {
         <Button type="submit" loading={isSubmitting} m={1}>
           Registrar
         </Button>
-        <Link href="#" m={1} fontSize={1} color="gray" fontWeight="bold">
+        <Link to="/" m={1} fontSize={1} color="gray" fontWeight="bold">
           Ja possui uma conta
         </Link>
       </Box>

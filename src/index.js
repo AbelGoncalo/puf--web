@@ -2,13 +2,20 @@ import * as React from 'react'
 import ReactDOM from 'react-dom/client'
 import reportWebVitals from './reportWebVitals'
 
+import { Theme } from '~/components/Theme'
+import { AuthProvider } from '~/components/modules'
+
 import { App } from './pages'
 //import { definitions } from './components/Theme/definitions'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <App />
+    <Theme>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </Theme>
   </React.StrictMode>
 )
 
