@@ -6,7 +6,7 @@ export const Dashboard = () => {
 
   return (
     <div>
-      Estou {auth.name}! <button onClick={logout}>Sair</button>
+      Olá {auth.user.name}! <button onClick={logout}>Sair</button>
     </div>
   )
 }

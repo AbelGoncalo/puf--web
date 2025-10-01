@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
+
 import axios from 'axios'
 
 import styled from 'styled-components'
@@ -20,7 +22,12 @@ const CenteredBox = ({ children, ...props }) => (
 )
 
 export const Login = () => {
+  const history = useHistory()
+  const location = useLocation()
   const [, { login: setAuth }] = useAuth()
+
+  const { from } = location.state || { from: { pathname: '/' } }
+
   const onSubmit = async values => {
     try {
       const res = await axios.get('http://localhost:9901/login', {
@@ -28,6 +35,7 @@ export const Login = () => {
       })
 
       setAuth(res.data)
+      history.replace(from)
     } catch (error) {
       console.log(error)
     }
